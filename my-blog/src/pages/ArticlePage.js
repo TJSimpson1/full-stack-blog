@@ -40,7 +40,7 @@ const ArticlePage = () => {
     if(!article) {
         return (
             <NotFoundPage />
-        )
+        );
     }
 
     return(

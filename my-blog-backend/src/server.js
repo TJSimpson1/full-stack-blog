@@ -30,6 +30,15 @@ app.use(async (req, res, next) => {
     
 });
 
+app.get('/api/articles', async (req, res) => {
+    const articles = await db.collection('articles').find({}).toArray();
+    if(articles){
+        res.json(articles);
+    } else {
+        res.sendStatus(404);
+    }
+})
+
 app.get('/api/articles/:name', async (req,res) => {
     const { name } = req.params;
     const { uid } = req.user;
@@ -96,6 +105,39 @@ app.post('/api/articles/:name/comments', async (req, res) => {
         res.send("That article doesn\'t exist!");
     }
 });
+
+app.post('/api/articles', async (req, res) => {
+    const { name, title, content } = req.body;
+
+    await db.collection('articles').insertOne({
+        name: name,
+        title: title,
+        content: content,
+        upvotes: 0,
+        comments: [],
+    });
+    
+    const article = await db.collection('articles').findOne({ name });
+
+    if(article) {
+        res.json(article);
+    } else{
+        res.send("That article doesn\'t exist!");
+    }
+});
+
+app.delete('/api/articles/:name', async (req, res) => {
+    const { name } = req.params;
+    const article = await db.collection('articles').findOne({ name });
+    if(article){
+        await db.collection('articles').deleteOne({ name: name });
+        res.sendStatus(200);
+    } else{
+        res.status(404).send("That article doesn\'t exist");
+    }  
+});
+
+
 
 connectToDb(() => {
     console.log("Successfully connected to database");

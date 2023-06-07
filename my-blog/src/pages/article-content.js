@@ -10,6 +10,7 @@ const articles = [
             non porta arcu porttitor non. In tincidunt vulputate nulla quis egestas. Ut 
             eleifend ut ipsum non fringilla. Praesent imperdiet nulla nec est luctus, at 
             sodales purus euismod.`,
+            '\\[\\ 0=\\nabla ^2G(r) = \\left( \\frac{\\partial^2}{\\partial x^2} + \\frac{\\partial^2}{\\partial y^2}\\right) G(r) = \\frac{\\partial}{\\partial x} \\left( \\frac{\\partial G}{\\partial r} \\frac{\\partial r}{\\partial x} \\right) + \\frac{\\partial}{\\partial y} \\left( \\frac{\\partial G}{\\partial r} \\frac{\\partial r}{\\partial y} \\right) \\] \\[\\ = \\frac{\\partial^2 G}{\\partial r^2} \\left(\\frac{\\partial r}{\\partial x} \\right)^2 + \\frac{\\partial G}{\\partial r} \\frac{\\partial^2 r}{\\partial x^2} + \\frac{\\partial^2 G}{\\partial r^2} \\left(\\frac{\\partial r}{\\partial y} \\right)^2 + \\frac{\\partial G}{\\partial r} \\frac{\\partial^2 r}{\\partial y^2} \\] \\[\\ =  \\frac{\\partial^2 G}{\\partial r^2} \\left( \\left(\\frac{\\partial r}{\\partial x} \\right)^2 + \\left(\\frac{\\partial r}{\\partial y} \\right)^2 \\right) + \\frac{\\partial G}{\\partial r} \\left( \\frac{\\partial^2 r}{\\partial x^2} + \\frac{\\partial^2 r}{\\partial y^2} \\right) . \\]',
             `Donec vel mauris lectus. Etiam nec lectus urna. Sed sodales ultrices dapibus. 
             Nam blandit tristique risus, eget accumsan nisl interdum eu. Aenean ac accumsan 
             nisi. Nunc vel pulvinar diam. Nam eleifend egestas viverra. Donec finibus lectus 

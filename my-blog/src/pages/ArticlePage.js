@@ -6,6 +6,7 @@ import CommentsList from "../components/CommentsList";
 import AddCommentForm from "../components/AddCommentForm";
 import { useEffect, useState } from "react";
 import useUser from "../hooks/useUser";
+import { MathJax } from "better-react-mathjax";
 
 const ArticlePage = () => {
     const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: [], canUpvote: false });
@@ -53,7 +54,7 @@ const ArticlePage = () => {
                 <p>This article has {articleInfo.upvotes} upvote(s)</p>
             </div>
             {article.content.map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
+                <MathJax key={i}><p>{paragraph}</p></MathJax>
             ))}
             {user
                 ?   <AddCommentForm

@@ -8,25 +8,29 @@ import NavBar from './NavBar';
 import NotFoundPage from "./pages/NotFoundPage";
 import LoginPage from './pages/LoginPage';
 import CreateAccountPage from './pages/CreateAccountPage';
+import { MathJaxContext } from 'better-react-mathjax';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <NavBar/>
-        <div id="page-body">
-          <Routes>
-            <Route path="/" element={<HomePage/>} />
-            <Route path="/about" element={<AboutPage/>} />
-            <Route path="/articles" element={<ArticlesListPage/>} />
-            <Route path="/article/:articleId" element={<ArticlePage/>} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/create-account' element={<CreateAccountPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+    <MathJaxContext>
+      <BrowserRouter>
+        <div className="App">
+          <NavBar/>
+          <div id="page-body">
+            <Routes>
+              <Route path="/" element={<HomePage/>} />
+              <Route path="/about" element={<AboutPage/>} />
+              <Route path="/articles" element={<ArticlesListPage/>} />
+              <Route path="/article/:articleId" element={<ArticlePage/>} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/create-account' element={<CreateAccountPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </MathJaxContext>
+    
     
   );
 }

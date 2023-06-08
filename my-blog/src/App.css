@@ -113,3 +113,17 @@ input, textarea {
   top: 8px;
   right: 8px;
 }
+
+.comment-right {
+  float: right;
+}
+
+.comment-button{
+  background-color: white;
+  border: none;
+  color: black;
+}
+
+.delete-link {
+  color: red;
+}

@@ -28,6 +28,19 @@ const ArticlePage = () => {
         }
     }, [isLoading, user, articleId]);
 
+    const deleteComment = async (text) => {
+        const token = user && await user.getIdToken();
+        const headers = token ? {authtoken: token} : {}
+        const response = await axios.delete(`/api/articles/${articleId}//comments`, {
+            data: {
+            postedBy: user.email,
+            text: text,
+        }, headers: { headers }
+    });
+    const newArticleInfo = response.data;
+    setArticleInfo(newArticleInfo);
+    }
+
     const article = articles.find(article => article.name === articleId);
 
     const addUpvote = async () => {
@@ -61,7 +74,7 @@ const ArticlePage = () => {
                         articleName={articleId}
                         onArticleUpdated={updatedArticle => setArticleInfo(updatedArticle)} />
                 : <button>Log in to comment</button>}
-            <CommentsList comments={articleInfo.comments} />
+            <CommentsList comments={articleInfo.comments} deleteComment={deleteComment} />
         </>
     );
 }

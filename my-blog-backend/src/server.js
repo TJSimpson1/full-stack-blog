@@ -106,6 +106,24 @@ app.post('/api/articles/:name/comments', async (req, res) => {
     }
 });
 
+app.delete(`/api/articles/:name/comments`, async (req, res) => {
+    const { name } = req.params;
+    const { postedBy, text } = req.body;
+    const { email } = req.user;
+
+    const article = await db.collection('articles').findOne({ name });
+
+    if(article){
+        await db.collection('articles').updateOne({ name }, {
+          $pull: { comments: { postedBy, text }}  
+        });
+        const updatedArticle = await db.collection('articles').findOne({ name });
+        res.json(updatedArticle);
+    } else{
+        res.send("Cannot find comment");
+    }
+})
+
 app.post('/api/articles', async (req, res) => {
     const { name, title, content } = req.body;
 

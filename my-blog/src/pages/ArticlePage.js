@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import articles from "./article-content";
 import axios from 'axios';
 import NotFoundPage from "./NotFoundPage";
 import CommentsList from "../components/CommentsList";
@@ -12,6 +11,7 @@ const ArticlePage = () => {
     const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: [], canUpvote: false });
     const { canUpvote } = articleInfo;
     const { articleId } = useParams();
+    const [articles, setArticles] = useState([]);
 
     const { user, isLoading } = useUser();
 
@@ -23,9 +23,18 @@ const ArticlePage = () => {
             const newArticleInfo = response.data;
             setArticleInfo(newArticleInfo);
         }
+        const loadArticles = async () => {
+            const token = user && await user.getIdToken();
+            const headers = token ? {authtoken: token} : {};
+            const response = await axios.get('/api/articles', { headers })
+            const articles = response.data;
+            setArticles(articles);
+        }
         if(isLoading){
             loadArticleInfo();
+            loadArticles();
         }
+        
     }, [isLoading, user, articleId]);
 
     const deleteComment = async (text) => {
@@ -66,7 +75,7 @@ const ArticlePage = () => {
                     : <button>Log in to upvote</button>}
                 <p>This article has {articleInfo.upvotes} upvote(s)</p>
             </div>
-            {article.content.map((paragraph, i) => (
+            {article?.content.map((paragraph, i) => (
                 <MathJax key={i}><p>{paragraph}</p></MathJax>
             ))}
             {user
